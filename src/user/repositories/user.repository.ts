@@ -13,16 +13,14 @@ export class UserRepository {
         const createdUser = new this.userModel(createCatDto);
         try {
             const saveDoc = await createdUser.save();
-            const createdeUser = new CreateUserDto({ ...createCatDto, _id: saveDoc._id.toString() });
-            console.log("🚀 ~ file: user.repository.ts ~ line 20 ~ UserRepository ~ createdUser.save ~ createdeUser", createdeUser);
-            return createdeUser;
+            return saveDoc;
         } catch (error) {
             console.log("🚀 ~ file: user.repository.ts ~ line 17 ~ UserRepository ~ createdUser.save ~ error.name", error.message);
             throw new ConflictException(error.name, error.message);
         }
     }
 
-    // async findAll(): Promise<Cat[]> {
-    //     return this.catModel.find().exec();
-    // }
+    async findByEmail(email: string) {
+        return this.userModel.findOne({ email: email }).exec();
+    }
 }

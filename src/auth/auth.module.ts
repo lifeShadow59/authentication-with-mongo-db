@@ -11,7 +11,7 @@ import { JwtStrategy } from './guard/jwt.strategy';
 
     JwtModule.register({
       secret: "SECRET",
-      signOptions: { expiresIn: '100s' }
+      signOptions: { expiresIn: '1 days' }
     })
 
   ],

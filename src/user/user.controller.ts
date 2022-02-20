@@ -6,14 +6,15 @@ import { ApiTags } from "@nestjs/swagger";
 
 @ApiTags('user')
 @Controller('user')
+@UseInterceptors(ClassSerializerInterceptor)
 export class UserController {
   constructor(private readonly userService: UserService) { }
 
-  @UseInterceptors(ClassSerializerInterceptor)
-  @Post()
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.userService.create(createUserDto);
-  }
+
+  // @Post()
+  // create(@Body() createUserDto: CreateUserDto) {
+  //   return this.userService.create(createUserDto);
+  // }
 
   @Get()
   findAll() {

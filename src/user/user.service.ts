@@ -29,15 +29,26 @@ export class UserService {
     return null;
   }
 
-
-
-  update(id: number, updateUserDto: UpdateUserDto) {
-    console.log("🚀 ~ file: user.service.ts ~ line 20 ~ UserService ~ update ~ updateUserDto", updateUserDto);
-    return updateUserDto;
-    return `This action updates a #${id} user`;
+  async findById(id: string) {
+    const user = await this.userRepository.findById(id);
+    if (user != null) {
+      const newUser = new CreateUserDto({ email: user.email, name: user.name, _id: user._id.toString() });
+      console.log("🚀 ~ file: user.service.ts ~ line 21 ~ UserService ~ findByEmail ~ newUser", newUser);
+      return newUser;
+    }
+    console.log("🚀 ~ file: user.service.ts ~ line 30 ~ UserService ~ findByEmail ~ user ", "null");
+    return null;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
-  }
+
+
+  // update(id: number, updateUserDto: UpdateUserDto) {
+  //   console.log("🚀 ~ file: user.service.ts ~ line 20 ~ UserService ~ update ~ updateUserDto", updateUserDto);
+  //   return updateUserDto;
+  //   return `This action updates a #${id} user`;
+  // }
+
+  // remove(id: number) {
+  //   return `This action removes a #${id} user`;
+  // }
 }
